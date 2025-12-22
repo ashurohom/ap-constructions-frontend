@@ -1,33 +1,84 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
+import LoginModal from "../components/LoginModal";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
 
 const Home = () => {
+  const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (username, password) => {
+    const success = await loginUser(username, password);
+    if (success) {
+      setShowLogin(false);
+      navigate("/dashboard");
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
-      <Navbar />
+      {/* Navbar */}
+      <Navbar onLoginClick={() => setShowLogin(true)} />
 
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50">
-        <div className="text-center px-4">
-          
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Welcome to AP Constructions
-          </h1>
+      <section className="min-h-[calc(100vh-64px)] bg-slate-100 flex items-center">
+        <div className="max-w-7xl mx-auto w-full px-4 py-10 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
-            Manage your clients, workers, attendance, payroll, and reports
-            from one powerful dashboard.
-          </p>
+          {/* Left Content */}
+          <div className="text-center md:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight mb-4">
+              Manage Construction Work <br />
+              <span className="text-yellow-500">Smartly & Efficiently</span>
+            </h1>
 
-          <div className="flex justify-center gap-4">
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-              Get Started
-            </button>
-            <button className="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-              Learn More
+            <p className="text-slate-600 text-base sm:text-lg mb-6 max-w-xl mx-auto md:mx-0">
+              AP Constructions helps you manage clients, workers, attendance,
+              payroll, expenses and reports — all in one place.
+            </p>
+
+            <button
+              onClick={() => setShowLogin(true)}
+              className="px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition"
+            >
+              Login to Dashboard
             </button>
           </div>
+
+          {/* Right Visual Cards */}
+          <div className="bg-white rounded-xl shadow-lg p-6 grid grid-cols-2 gap-4">
+            <div className="p-4 bg-slate-100 rounded">
+              <p className="text-xs sm:text-sm text-slate-500">Workers</p>
+              <p className="text-xl sm:text-2xl font-bold text-slate-900">120+</p>
+            </div>
+
+            <div className="p-4 bg-slate-100 rounded">
+              <p className="text-xs sm:text-sm text-slate-500">Clients</p>
+              <p className="text-xl sm:text-2xl font-bold text-slate-900">45+</p>
+            </div>
+
+            <div className="p-4 bg-slate-100 rounded">
+              <p className="text-xs sm:text-sm text-slate-500">Active Sites</p>
+              <p className="text-xl sm:text-2xl font-bold text-slate-900">12</p>
+            </div>
+
+            <div className="p-4 bg-slate-100 rounded">
+              <p className="text-xs sm:text-sm text-slate-500">Daily Attendance</p>
+              <p className="text-xl sm:text-2xl font-bold text-slate-900">Live</p>
+            </div>
+          </div>
+
         </div>
       </section>
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        onLogin={handleLogin}
+      />
     </>
   );
 };
