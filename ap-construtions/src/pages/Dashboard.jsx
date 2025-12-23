@@ -15,6 +15,8 @@ const Dashboard = () => {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+
+          {/* Clients */}
           <button
             onClick={() => navigate("/clients")}
             className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-left"
@@ -22,6 +24,16 @@ const Dashboard = () => {
             <p className="text-sm text-slate-500">Manage</p>
             <p className="text-xl font-semibold text-slate-900">Clients</p>
           </button>
+
+          {/* Workers */}
+          <button
+            onClick={() => navigate("/workers")}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-left"
+          >
+            <p className="text-sm text-slate-500">Manage</p>
+            <p className="text-xl font-semibold text-slate-900">Workers</p>
+          </button>
+
         </div>
       </div>
     </>
