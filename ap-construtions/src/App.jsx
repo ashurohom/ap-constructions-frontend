@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Workers from "./pages/Workers";
 import Clients from "./pages/Clients";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Worksites from "./pages/Worksites";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
         />
 
 
+        <Route
+          path="/worksites"
+          element={
+            <ProtectedRoute>
+              <Worksites />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>
