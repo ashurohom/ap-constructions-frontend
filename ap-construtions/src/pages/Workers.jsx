@@ -57,7 +57,7 @@ const Workers = () => {
                 <th className="p-3 text-left">Name</th>
                 <th className="p-3 text-left">Village</th>
                 <th className="p-3 text-left">Phone</th>
-                <th className="p-3 text-left">Salary</th>
+                <th className="p-3 text-left">Salary/Day</th>
                 <th className="p-3 text-left">Actions</th>
               </tr>
             </thead>
@@ -68,9 +68,10 @@ const Workers = () => {
                   <td className="p-3">{w.village || "-"}</td>
                   <td className="p-3">{w.phone || "-"}</td>
                   <td className="p-3">
-                    {w.current_salary
-                      ? `₹${w.current_salary.full_day_rate} / ₹${w.current_salary.half_day_rate}`
-                      : "-"}
+                    {w.salary
+                        ? `₹${w.salary.full_day_rate} / ₹${w.salary.half_day_rate}`
+                        : "-"}
+
                   </td>
                   <td className="p-3">
                     <button
