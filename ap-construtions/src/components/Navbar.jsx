@@ -14,11 +14,23 @@ const Navbar = ({ onLoginClick }) => {
     <nav className="w-full bg-slate-900 text-white h-16">
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
 
-        {/* Logo */}
+        {/* Left: Back Button + Logo */}
         <div className="flex items-center gap-3">
+          
+          {/* Back Button */}
+          <button
+            onClick={() => navigate(-1)}
+            className="text-white hover:text-yellow-400 transition"
+            title="Go back"
+          >
+            ←
+          </button>
+
+          {/* Logo */}
           <div className="w-10 h-10 bg-yellow-500 text-slate-900 font-bold flex items-center justify-center rounded">
             AP
           </div>
+
           <span className="text-lg font-semibold tracking-wide">
             AP Constructions
           </span>
