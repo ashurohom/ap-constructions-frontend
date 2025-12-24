@@ -5,6 +5,7 @@ import Workers from "./pages/Workers";
 import Clients from "./pages/Clients";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Worksites from "./pages/Worksites";
+import WorksiteDetails from "./pages/WorksiteDetails";
 
 function App() {
   return (
@@ -47,6 +48,16 @@ function App() {
           element={
             <ProtectedRoute>
               <Worksites />
+            </ProtectedRoute>
+          }
+        />
+
+
+        <Route
+          path="/worksites/:id"
+          element={
+            <ProtectedRoute>
+          <WorksiteDetails />
             </ProtectedRoute>
           }
         />

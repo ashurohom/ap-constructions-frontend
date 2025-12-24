@@ -24,22 +24,33 @@ const Navbar = ({ onLoginClick }) => {
           </span>
         </div>
 
-        {/* Right Button */}
-        {!loggedIn ? (
-          <button
-            onClick={onLoginClick}
-            className="px-4 py-2 bg-yellow-500 text-slate-900 font-medium rounded hover:bg-yellow-400 transition"
-          >
-            Login
-          </button>
-        ) : (
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 bg-red-500 text-white font-medium rounded hover:bg-red-400 transition"
-          >
-            Logout
-          </button>
-        )}
+        {/* Right Side Buttons */}
+        <div className="flex items-center gap-4">
+          {loggedIn && (
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-500 transition"
+            >
+              Dashboard
+            </button>
+          )}
+
+          {!loggedIn ? (
+            <button
+              onClick={onLoginClick}
+              className="px-4 py-2 bg-yellow-500 text-slate-900 font-medium rounded hover:bg-yellow-400 transition"
+            >
+              Login
+            </button>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-red-500 text-white font-medium rounded hover:bg-red-400 transition"
+            >
+              Logout
+            </button>
+          )}
+        </div>
 
       </div>
     </nav>
