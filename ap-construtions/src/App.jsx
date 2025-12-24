@@ -6,6 +6,8 @@ import Clients from "./pages/Clients";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Worksites from "./pages/Worksites";
 import WorksiteDetails from "./pages/WorksiteDetails";
+import AttendanceList from "./pages/AttendanceList";
+import MarkAttendance from "./pages/MarkAttendance";
 
 function App() {
   return (
@@ -61,6 +63,25 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route 
+          path="/attendance" 
+          element={
+            <ProtectedRoute>
+              <AttendanceList />
+            </ProtectedRoute>
+          } 
+        />
+        
+        
+        <Route 
+          path="/attendance/mark" 
+          element={
+            <ProtectedRoute>
+              <MarkAttendance />
+            </ProtectedRoute>
+          } />
+
 
       </Routes>
     </BrowserRouter>

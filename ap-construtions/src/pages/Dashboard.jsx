@@ -44,6 +44,28 @@ const Dashboard = () => {
             <p className="text-xl font-semibold text-slate-900">Worksites</p>
           </button>
 
+
+          <button
+            onClick={() => navigate("/attendance/mark")}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-left"
+          >
+            <p className="text-sm text-slate-500">Daily Work</p>
+            <p className="text-xl font-semibold text-slate-900">
+              Mark Attendance
+            </p>
+          </button>
+
+          <button
+            onClick={() => navigate("/attendance")}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-left"
+          >
+            <p className="text-sm text-slate-500">Records</p>
+            <p className="text-xl font-semibold text-slate-900">
+              Attendance List
+            </p>
+          </button>
+
+
         </div>
       </div>
     </>
