@@ -13,11 +13,15 @@ const authHeader = () => ({
 const AttendanceList = () => {
   const [attendance, setAttendance] = useState([]);
   const [date, setDate] = useState("");
+  const [payment, setPayment] = useState("");
 
   const loadAttendance = async () => {
     const res = await axios.get(`${API_BASE}/attendance/`, {
       ...authHeader(),
-      params: { date },
+      params: {
+        date,
+        payment_status: payment,
+      },
     });
     setAttendance(res.data);
   };
@@ -35,6 +39,15 @@ const AttendanceList = () => {
     loadAttendance();
   };
 
+  const markUnpaid = async (id) => {
+    await axios.patch(
+      `${API_BASE}/attendance/${id}/mark_unpaid/`,
+      {},
+      authHeader()
+    );
+    loadAttendance();
+  };
+
   return (
     <>
       <Navbar />
@@ -42,19 +55,30 @@ const AttendanceList = () => {
       <div className="min-h-[calc(100vh-64px)] bg-slate-100 p-6">
         <h1 className="text-2xl font-bold mb-6">Attendance Records</h1>
 
-        {/* Filter */}
-        <div className="mb-4">
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-4">
           <input
             type="date"
             className="border px-4 py-2 rounded"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
+
+          <select
+            className="border px-4 py-2 rounded"
+            value={payment}
+            onChange={(e) => setPayment(e.target.value)}
+          >
+            <option value="">All Payments</option>
+            <option value="PAID">Paid</option>
+            <option value="UNPAID">Unpaid</option>
+          </select>
+
           <button
             onClick={loadAttendance}
-            className="ml-3 bg-slate-900 text-white px-4 py-2 rounded"
+            className="bg-slate-900 text-white px-4 py-2 rounded"
           >
-            Filter
+            Apply Filters
           </button>
         </div>
 
@@ -80,14 +104,31 @@ const AttendanceList = () => {
                   <td className="p-3">{a.worksite_name}</td>
                   <td className="p-3">{a.status}</td>
                   <td className="p-3">₹{a.amount_earned}</td>
-                  <td className="p-3">{a.payment_status}</td>
                   <td className="p-3">
-                    {a.payment_status === "UNPAID" && (
+                    <span
+                      className={`px-2 py-1 rounded text-white ${
+                        a.payment_status === "PAID"
+                          ? "bg-green-600"
+                          : "bg-red-500"
+                      }`}
+                    >
+                      {a.payment_status}
+                    </span>
+                  </td>
+                  <td className="p-3">
+                    {a.payment_status === "UNPAID" ? (
                       <button
                         onClick={() => markPaid(a.id)}
                         className="text-green-600 hover:underline"
                       >
                         Mark Paid
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => markUnpaid(a.id)}
+                        className="text-red-600 hover:underline"
+                      >
+                        Mark Unpaid
                       </button>
                     )}
                   </td>

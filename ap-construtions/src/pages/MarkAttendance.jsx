@@ -11,9 +11,7 @@ const authHeader = () => ({
 });
 
 const MarkAttendance = () => {
-  const [date, setDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [worksites, setWorksites] = useState([]);
   const [selectedWorksite, setSelectedWorksite] = useState("");
   const [workers, setWorkers] = useState([]);
@@ -29,6 +27,7 @@ const MarkAttendance = () => {
 
   // Load assigned workers
   const loadWorkers = async (worksiteId) => {
+    if (!worksiteId) return;
     const res = await axios.get(
       `${API_BASE}/worksites/${worksiteId}/workers/`,
       authHeader()
@@ -45,7 +44,10 @@ const MarkAttendance = () => {
   };
 
   const saveAttendance = async () => {
-    if (!selectedWorksite) return;
+    if (!date || !selectedWorksite) {
+      alert("Please select date and worksite");
+      return;
+    }
 
     setLoading(true);
 
@@ -56,7 +58,6 @@ const MarkAttendance = () => {
           {
             attendance_date: date,
             worker: worker.worker,
-            // client: null, // backend derives via worksite
             worksite: selectedWorksite,
             status: attendance[worker.worker] || "ABSENT",
           },
@@ -117,7 +118,7 @@ const MarkAttendance = () => {
             </thead>
             <tbody>
               {workers.map((w) => (
-                <tr key={w.id} className="border-t">
+                <tr key={w.worker} className="border-t">
                   <td className="p-3">{w.worker_name}</td>
                   <td className="p-3">
                     <select
@@ -150,7 +151,7 @@ const MarkAttendance = () => {
         <div className="mt-6">
           <button
             onClick={saveAttendance}
-            disabled={loading}
+            disabled={loading || workers.length === 0}
             className="bg-slate-900 text-white px-6 py-3 rounded hover:bg-slate-800 disabled:opacity-50"
           >
             {loading ? "Saving..." : "Save Attendance"}
