@@ -76,6 +76,16 @@ const Dashboard = () => {
             </p>
           </button>
 
+          <button
+            onClick={() => navigate("/expenses")}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-left"
+          >
+            <p className="text-sm text-slate-500">Manage</p>
+            <p className="text-xl font-semibold text-slate-900">Expenses</p>
+          </button>
+
+
+
 
         </div>
       </div>

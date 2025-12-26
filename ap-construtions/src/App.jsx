@@ -10,6 +10,7 @@ import AttendanceList from "./pages/AttendanceList";
 import MarkAttendance from "./pages/MarkAttendance";
 import Payroll from "./pages/Payroll";
 import WorkerPayrollHistory from "./pages/WorkerPayrollHistory";
+import Expenses from "./pages/Expenses";
 
 function App() {
   return (
@@ -99,6 +100,16 @@ function App() {
             element={
               <ProtectedRoute>
                 <WorkerPayrollHistory />
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/expenses"
+            element={
+              <ProtectedRoute>
+                <Expenses />
               </ProtectedRoute>
             }
           />
