@@ -8,6 +8,8 @@ import Worksites from "./pages/Worksites";
 import WorksiteDetails from "./pages/WorksiteDetails";
 import AttendanceList from "./pages/AttendanceList";
 import MarkAttendance from "./pages/MarkAttendance";
+import Payroll from "./pages/Payroll";
+import WorkerPayrollHistory from "./pages/WorkerPayrollHistory";
 
 function App() {
   return (
@@ -80,7 +82,28 @@ function App() {
             <ProtectedRoute>
               <MarkAttendance />
             </ProtectedRoute>
-          } />
+            } 
+          />
+
+          <Route
+            path="/payroll"
+            element={
+              <ProtectedRoute>
+                <Payroll />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/payroll/worker/:workerId"
+            element={
+              <ProtectedRoute>
+                <WorkerPayrollHistory />
+              </ProtectedRoute>
+            }
+          />
+
+
 
 
       </Routes>
