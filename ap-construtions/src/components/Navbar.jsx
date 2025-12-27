@@ -11,16 +11,16 @@ const Navbar = ({ onLoginClick }) => {
   };
 
   return (
-    <nav className="w-full bg-slate-900 text-white h-16">
-      <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+    <nav className="w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white h-18 shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
 
-        {/* Left: Back Button + Logo */}
-        <div className="flex items-center gap-3">
-          
+        {/* LEFT: Back + Logo */}
+        <div className="flex items-center gap-4">
+
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
-            className="text-white hover:text-yellow-400 transition"
+            className="text-xl text-white/80 hover:text-yellow-400 transition"
             title="Go back"
           >
             ←
@@ -29,48 +29,63 @@ const Navbar = ({ onLoginClick }) => {
           {/* Logo */}
           <div
             onClick={() => navigate("/")}
-            className="w-10 h-10 bg-yellow-500 text-slate-900 font-bold flex items-center justify-center rounded cursor-pointer"
+            className="flex items-center gap-3 cursor-pointer group"
             title="Home"
           >
-            AP
+            <img
+              src="/ap_logo.png"
+              alt="AP Constructions Logo"
+              className="h-12 w-12 object-contain rounded-lg shadow-md group-hover:scale-105 transition"
+            />
+            <span className="text-xl font-semibold tracking-wide group-hover:text-yellow-400 transition">
+              AP Constructions
+            </span>
           </div>
-
-          <span className="text-lg font-semibold tracking-wide">
-            AP Constructions
-          </span>
         </div>
 
-        {/* Right Side Buttons */}
-        <div className="flex items-center gap-4">
+        {/* RIGHT: Actions */}
+        <div className="flex items-center gap-3">
 
-          {/* ✅ Home Button */}
+          {/* Home */}
           <button
             onClick={() => navigate("/")}
-            className="px-4 py-2 bg-slate-700 text-white font-medium rounded hover:bg-slate-600 transition"
+            className="px-4 py-2 rounded-lg text-sm font-medium
+                       bg-white/10 hover:bg-white/20
+                       border border-white/10
+                       transition shadow-sm"
           >
             Home
           </button>
 
+          {/* Dashboard */}
           {loggedIn && (
             <button
               onClick={() => navigate("/dashboard")}
-              className="px-4 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-500 transition"
+              className="px-4 py-2 rounded-lg text-sm font-medium
+                         bg-blue-600 hover:bg-blue-500
+                         shadow-md hover:shadow-lg transition"
             >
               Dashboard
             </button>
           )}
 
+          {/* Login / Logout */}
           {!loggedIn ? (
             <button
               onClick={onLoginClick}
-              className="px-4 py-2 bg-yellow-500 text-slate-900 font-medium rounded hover:bg-yellow-400 transition"
+              className="px-4 py-2 rounded-lg text-sm font-semibold
+                         bg-yellow-400 text-slate-900
+                         hover:bg-yellow-300
+                         shadow-md hover:shadow-lg transition"
             >
               Login
             </button>
           ) : (
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-500 text-white font-medium rounded hover:bg-red-400 transition"
+              className="px-4 py-2 rounded-lg text-sm font-semibold
+                         bg-red-500 hover:bg-red-400
+                         shadow-md hover:shadow-lg transition"
             >
               Logout
             </button>
