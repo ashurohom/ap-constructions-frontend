@@ -13,14 +13,14 @@ const authHeader = () => ({
 const AttendanceList = () => {
   const [attendance, setAttendance] = useState([]);
   const [date, setDate] = useState("");
-  const [payment, setPayment] = useState("");
+  const [search, setSearch] = useState("");
 
   const loadAttendance = async () => {
     const res = await axios.get(`${API_BASE}/attendance/`, {
       ...authHeader(),
       params: {
         date,
-        payment_status: payment,
+        search,
       },
     });
     setAttendance(res.data);
@@ -64,21 +64,19 @@ const AttendanceList = () => {
             onChange={(e) => setDate(e.target.value)}
           />
 
-          <select
-            className="border px-4 py-2 rounded"
-            value={payment}
-            onChange={(e) => setPayment(e.target.value)}
-          >
-            <option value="">All Payments</option>
-            <option value="PAID">Paid</option>
-            <option value="UNPAID">Unpaid</option>
-          </select>
+          <input
+            type="text"
+            placeholder="Search by worker or worksite"
+            className="border px-4 py-2 rounded w-64"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
           <button
             onClick={loadAttendance}
             className="bg-slate-900 text-white px-4 py-2 rounded"
           >
-            Apply Filters
+            Apply
           </button>
         </div>
 
