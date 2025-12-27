@@ -2,9 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import LoginModal from "../components/LoginModal";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/authService";
-import { isAuthenticated } from "../services/authService";
-
+import { loginUser, isAuthenticated } from "../services/authService";
 
 const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -21,13 +19,12 @@ const Home = () => {
   };
 
   const handleDashboardClick = () => {
-  if (isAuthenticated()) {
-    navigate("/dashboard");
-  } else {
-    setShowLogin(true);
-  }
+    if (isAuthenticated()) {
+      navigate("/dashboard");
+    } else {
+      setShowLogin(true);
+    }
   };
-
 
   return (
     <>
@@ -56,32 +53,61 @@ const Home = () => {
             >
               Login to Dashboard
             </button>
-
           </div>
 
-          {/* Right Visual Cards */}
-          <div className="bg-white rounded-xl shadow-lg p-6 grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-100 rounded">
-              <p className="text-xs sm:text-sm text-slate-500">Workers</p>
-              <p className="text-xl sm:text-2xl font-bold text-slate-900">120+</p>
+          {/* Right Side */}
+          <div className="space-y-4">
+
+            {/* Stats Cards */}
+            <div className="bg-white rounded-xl shadow-lg p-6 grid grid-cols-2 gap-4">
+              <div className="p-4 bg-slate-100 rounded">
+                <p className="text-xs text-slate-500">Workers</p>
+                <p className="text-2xl font-bold text-slate-900">120+</p>
+              </div>
+
+              <div className="p-4 bg-slate-100 rounded">
+                <p className="text-xs text-slate-500">Clients</p>
+                <p className="text-2xl font-bold text-slate-900">45+</p>
+              </div>
+
+              <div className="p-4 bg-slate-100 rounded">
+                <p className="text-xs text-slate-500">Active Sites</p>
+                <p className="text-2xl font-bold text-slate-900">12</p>
+              </div>
+
+              <div className="p-4 bg-slate-100 rounded">
+                <p className="text-xs text-slate-500">Daily Attendance</p>
+                <p className="text-2xl font-bold text-slate-900">Live</p>
+              </div>
             </div>
 
-            <div className="p-4 bg-slate-100 rounded">
-              <p className="text-xs sm:text-sm text-slate-500">Clients</p>
-              <p className="text-xl sm:text-2xl font-bold text-slate-900">45+</p>
+            {/* Developer Profile Card */}
+            {/* Developer Credit – Advanced One Line */}
+            <div className="bg-white rounded-lg shadow px-5 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
+              
+              <span className="text-slate-600">
+                Designed & Developed by{" "}
+                <span className="font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                  Ashitosh Rohom
+                </span>
+              </span>
+
+              <a
+                href="https://ashitoshrohom.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full 
+                          bg-slate-900 text-white text-sm font-medium
+                          hover:bg-slate-800 hover:shadow-md transition-all"
+              >
+                🤝 Connect
+              </a>
+
             </div>
 
-            <div className="p-4 bg-slate-100 rounded">
-              <p className="text-xs sm:text-sm text-slate-500">Active Sites</p>
-              <p className="text-xl sm:text-2xl font-bold text-slate-900">12</p>
-            </div>
 
-            <div className="p-4 bg-slate-100 rounded">
-              <p className="text-xs sm:text-sm text-slate-500">Daily Attendance</p>
-              <p className="text-xl sm:text-2xl font-bold text-slate-900">Live</p>
-            </div>
+
           </div>
-
         </div>
       </section>
 
