@@ -66,12 +66,12 @@ const Payroll = () => {
             Generate Payroll
           </button>
 
-          <button
+          {/* <button
             onClick={loadPayroll}
             className="border px-4 py-2 rounded"
           >
             Filter
-          </button>
+          </button> */}
         </div>
 
         {/* Table */}

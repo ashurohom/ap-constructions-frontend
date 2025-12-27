@@ -136,12 +136,12 @@ const WorksiteDetails = () => {
               
             ))}
 
-          <button
+          {/* <button
             onClick={() => navigate(`/attendance/mark?worksite=${id}`)}
             className="bg-slate-900 text-white px-4 py-2 rounded hover:bg-slate-800"
           >
             Mark Attendance
-          </button>
+          </button> */}
 
           </div>
 

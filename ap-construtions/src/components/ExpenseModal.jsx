@@ -138,7 +138,7 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
 
             <div>
               <label className="block text-sm font-medium mb-1">
-                Worksite (Optional)
+                Worksite
               </label>
               <select
                 name="worksite"
@@ -159,7 +159,7 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
           {/* Description */}
           <div>
             <label className="block text-sm font-medium mb-1">
-              Description (Optional)
+              Description
             </label>
             <textarea
               name="description"

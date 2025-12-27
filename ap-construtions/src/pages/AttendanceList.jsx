@@ -82,18 +82,19 @@ const AttendanceList = () => {
 
         {/* Table */}
         <div className="bg-white rounded-xl shadow overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full table-fixed">
             <thead className="bg-slate-200">
               <tr>
-                <th className="p-3">Date</th>
-                <th className="p-3">Worker</th>
-                <th className="p-3">Worksite</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Amount</th>
-                <th className="p-3">Payment</th>
-                <th className="p-3">Action</th>
+                <th className="p-3 w-[140px]">Date</th>
+                <th className="p-3 w-[180px]">Worker</th>
+                <th className="p-3 w-[160px]">Worksite</th>
+                <th className="p-3 w-[120px]">Status</th>
+                <th className="p-3 w-[120px]">Amount</th>
+                <th className="p-3 w-[120px]">Payment</th>
+                <th className="p-3 w-[140px]">Action</th>
               </tr>
             </thead>
+
             <tbody>
               {attendance.map((a) => (
                 <tr key={a.id} className="border-t">
@@ -102,9 +103,11 @@ const AttendanceList = () => {
                   <td className="p-3">{a.worksite_name}</td>
                   <td className="p-3">{a.status}</td>
                   <td className="p-3">₹{a.amount_earned}</td>
+
+                  {/* PAYMENT */}
                   <td className="p-3">
                     <span
-                      className={`px-2 py-1 rounded text-white ${
+                      className={`inline-flex items-center justify-center px-2 py-1 text-sm rounded text-white ${
                         a.payment_status === "PAID"
                           ? "bg-green-600"
                           : "bg-red-500"
@@ -113,6 +116,8 @@ const AttendanceList = () => {
                       {a.payment_status}
                     </span>
                   </td>
+
+                  {/* ACTION */}
                   <td className="p-3">
                     {a.payment_status === "UNPAID" ? (
                       <button
@@ -143,6 +148,7 @@ const AttendanceList = () => {
             </tbody>
           </table>
         </div>
+
       </div>
     </>
   );
