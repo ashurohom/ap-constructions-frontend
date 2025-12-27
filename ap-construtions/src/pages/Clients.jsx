@@ -55,6 +55,7 @@ const Clients = () => {
             <thead className="bg-slate-200 text-left">
               <tr>
                 <th className="p-3">Name</th>
+                <th className="p-3">Site Name</th>
                 <th className="p-3">Address</th>
                 <th className="p-3">Phone</th>
                 <th className="p-3">Actions</th>
@@ -64,6 +65,9 @@ const Clients = () => {
               {filteredClients.map((client) => (
                 <tr key={client.id} className="border-t">
                   <td className="p-3 font-medium">{client.name}</td>
+                  <td className="p-3 text-slate-700">
+                    {client.site_name || "-"}
+                  </td>
                   <td className="p-3 text-slate-600">
                     {client.address || "-"}
                   </td>
