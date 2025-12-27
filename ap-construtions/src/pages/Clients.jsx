@@ -19,7 +19,7 @@ const Clients = () => {
     loadClients();
   }, []);
 
-  const filteredClients = clients.filter(client =>
+  const filteredClients = clients.filter((client) =>
     client.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -55,6 +55,7 @@ const Clients = () => {
             <thead className="bg-slate-200 text-left">
               <tr>
                 <th className="p-3">Name</th>
+                <th className="p-3">Address</th>
                 <th className="p-3">Phone</th>
                 <th className="p-3">Actions</th>
               </tr>
@@ -62,7 +63,10 @@ const Clients = () => {
             <tbody>
               {filteredClients.map((client) => (
                 <tr key={client.id} className="border-t">
-                  <td className="p-3">{client.name}</td>
+                  <td className="p-3 font-medium">{client.name}</td>
+                  <td className="p-3 text-slate-600">
+                    {client.address || "-"}
+                  </td>
                   <td className="p-3">{client.phone || "-"}</td>
                   <td className="p-3">
                     <button
@@ -77,7 +81,7 @@ const Clients = () => {
 
               {filteredClients.length === 0 && (
                 <tr>
-                  <td colSpan="3" className="p-4 text-center text-slate-500">
+                  <td colSpan="4" className="p-4 text-center text-slate-500">
                     No clients found
                   </td>
                 </tr>
