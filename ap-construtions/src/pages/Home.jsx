@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import LoginModal from "../components/LoginModal";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
+import { isAuthenticated } from "../services/authService";
+
 
 const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -17,6 +19,15 @@ const Home = () => {
     }
     return false;
   };
+
+  const handleDashboardClick = () => {
+  if (isAuthenticated()) {
+    navigate("/dashboard");
+  } else {
+    setShowLogin(true);
+  }
+  };
+
 
   return (
     <>
@@ -40,11 +51,12 @@ const Home = () => {
             </p>
 
             <button
-              onClick={() => setShowLogin(true)}
+              onClick={handleDashboardClick}
               className="px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition"
             >
               Login to Dashboard
             </button>
+
           </div>
 
           {/* Right Visual Cards */}

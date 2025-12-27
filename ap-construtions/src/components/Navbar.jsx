@@ -27,7 +27,11 @@ const Navbar = ({ onLoginClick }) => {
           </button>
 
           {/* Logo */}
-          <div className="w-10 h-10 bg-yellow-500 text-slate-900 font-bold flex items-center justify-center rounded">
+          <div
+            onClick={() => navigate("/")}
+            className="w-10 h-10 bg-yellow-500 text-slate-900 font-bold flex items-center justify-center rounded cursor-pointer"
+            title="Home"
+          >
             AP
           </div>
 
@@ -38,6 +42,15 @@ const Navbar = ({ onLoginClick }) => {
 
         {/* Right Side Buttons */}
         <div className="flex items-center gap-4">
+
+          {/* ✅ Home Button */}
+          <button
+            onClick={() => navigate("/")}
+            className="px-4 py-2 bg-slate-700 text-white font-medium rounded hover:bg-slate-600 transition"
+          >
+            Home
+          </button>
+
           {loggedIn && (
             <button
               onClick={() => navigate("/dashboard")}
