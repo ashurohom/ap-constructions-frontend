@@ -81,15 +81,23 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Developer Profile Card */}
-            {/* Developer Credit – Advanced One Line */}
+            {/* Developer Profile Card
             <div className="bg-white rounded-lg shadow px-5 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
               
               <span className="text-slate-600">
-                Designed & Developed by{" "}
-                <span className="font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                © 2025{" "}
+                <a
+                  href="https://www.linkedin.com/in/ashitoshrohom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-blue-600 hover:text-blue-700 hover:underline transition"
+                >
                   Ashitosh Rohom
-                </span>
+                </a>
+                . Designed & Developed for{" "}
+                <span className="font-medium text-slate-700">
+                  AP Constructions
+                </span>.
               </span>
 
               <a
@@ -103,7 +111,8 @@ const Home = () => {
                 🤝 Connect
               </a>
 
-            </div>
+            </div> */}
+
 
 
 
