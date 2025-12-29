@@ -81,7 +81,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Developer Profile Card
+            {/* Developer Profile Card*/
             <div className="bg-white rounded-lg shadow px-5 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
               
               <span className="text-slate-600">
@@ -111,7 +111,7 @@ const Home = () => {
                 🤝 Connect
               </a>
 
-            </div> */}
+            </div> }
 
 
 
