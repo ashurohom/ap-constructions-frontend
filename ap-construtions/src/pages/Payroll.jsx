@@ -83,8 +83,8 @@ const Payroll = () => {
                 <th className="p-3">Full Days</th>
                 <th className="p-3">Half Days</th>
                 <th className="p-3">Total Amount</th>
-                <th className="p-3">Status</th>
-                <th className="p-3">Action</th>
+                {/* <th className="p-3">Status</th>
+                <th className="p-3">Action</th> */}
               </tr>
             </thead>
             <tbody>
@@ -101,8 +101,8 @@ const Payroll = () => {
                   <td className="p-3">{p.total_full_days}</td>
                   <td className="p-3">{p.total_half_days}</td>
                   <td className="p-3">₹{p.total_amount}</td>
-                  <td className="p-3">{p.paid_status}</td>
-                  <td className="p-3">
+                  {/* <td className="p-3">{p.paid_status}</td> */}
+                  {/* <td className="p-3">
                     {p.paid_status === "UNPAID" ? (
                       <button
                         onClick={() => markPayrollPaid(p.id).then(loadPayroll)}
@@ -120,7 +120,7 @@ const Payroll = () => {
                         Mark Unpaid
                       </button>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
 

@@ -41,7 +41,7 @@ const WorkerPayrollHistory = () => {
                 <th className="p-3">Worksite</th>
                 <th className="p-3">Status</th>
                 <th className="p-3">Amount</th>
-                <th className="p-3">Payment</th>
+                {/* <th className="p-3">Payment</th> */}
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@ const WorkerPayrollHistory = () => {
                   <td className="p-3">{a.worksite_name}</td>
                   <td className="p-3">{a.status}</td>
                   <td className="p-3">₹{a.amount_earned}</td>
-                  <td className="p-3">{a.payment_status}</td>
+                  {/* <td className="p-3">{a.payment_status}</td> */}
                 </tr>
               ))}
             </tbody>
