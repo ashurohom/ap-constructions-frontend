@@ -90,8 +90,8 @@ const AttendanceList = () => {
                 <th className="p-3 w-[160px]">Worksite</th>
                 <th className="p-3 w-[120px]">Status</th>
                 <th className="p-3 w-[120px]">Amount</th>
-                <th className="p-3 w-[120px]">Payment</th>
-                <th className="p-3 w-[140px]">Action</th>
+                {/* <th className="p-3 w-[120px]">Payment</th>
+                <th className="p-3 w-[140px]">Action</th> */}
               </tr>
             </thead>
 
@@ -105,7 +105,7 @@ const AttendanceList = () => {
                   <td className="p-3">₹{a.amount_earned}</td>
 
                   {/* PAYMENT */}
-                  <td className="p-3">
+                  {/* <td className="p-3">
                     <span
                       className={`inline-flex items-center justify-center px-2 py-1 text-sm rounded text-white ${
                         a.payment_status === "PAID"
@@ -115,10 +115,10 @@ const AttendanceList = () => {
                     >
                       {a.payment_status}
                     </span>
-                  </td>
+                  </td> */}
 
                   {/* ACTION */}
-                  <td className="p-3">
+                  {/* <td className="p-3">
                     {a.payment_status === "UNPAID" ? (
                       <button
                         onClick={() => markPaid(a.id)}
@@ -134,7 +134,7 @@ const AttendanceList = () => {
                         Mark Unpaid
                       </button>
                     )}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
 
