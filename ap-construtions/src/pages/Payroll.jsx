@@ -3,8 +3,8 @@ import Navbar from "../components/Navbar";
 import {
   generatePayroll,
   getPayrollList,
-  markPayrollPaid,
-  markPayrollUnpaid,
+  // markPayrollPaid,
+  // markPayrollUnpaid,
 } from "../services/payrollService";
 import { useNavigate } from "react-router-dom";
 
@@ -92,9 +92,13 @@ const Payroll = () => {
                 <tr key={p.id} className="border-t">
                   <td
                     className="p-3 text-blue-600 cursor-pointer"
-                    onClick={() =>
-                      navigate(`/payroll/worker/${p.worker}`)
-                    }
+                    onClick={() => {
+                      if (p.worker) {
+                        navigate(`/payroll/worker/${p.worker}`);
+                      }
+                    }}
+
+
                   >
                     {p.worker_name}
                   </td>
