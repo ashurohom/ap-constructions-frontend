@@ -15,8 +15,10 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
 
   useEffect(() => {
     if (isOpen) {
+      // Set today's date as default
+      const today = new Date().toISOString().split('T')[0];
       setForm({
-        expense_date: "",
+        expense_date: today,
         title: "",
         description: "",
         amount: "",
@@ -50,28 +52,52 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
     setLoading(false);
   };
 
-  return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg">
+  // Close modal when clicking outside
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
-        {/* Header */}
-        <div className="px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Add Expense
-          </h2>
-          <p className="text-sm text-slate-500">
-            Record a new expense entry
-          </p>
+  return (
+    <div 
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4 py-4 md:py-0 overflow-y-auto"
+      onClick={handleBackdropClick}
+    >
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] md:max-h-[85vh] overflow-y-auto">
+        
+        {/* Header - Sticky on mobile */}
+        <div className="sticky top-0 bg-white px-4 py-3 md:px-6 md:py-4 border-b z-10">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">
+                Add Expense
+              </h2>
+              <p className="text-xs md:text-sm text-slate-500">
+                Record a new expense entry
+              </p>
+            </div>
+            {/* Close button for mobile */}
+            <button
+              onClick={onClose}
+              className="md:hidden p-1 hover:bg-gray-100 rounded-full"
+              aria-label="Close"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Form */}
-        <form onSubmit={submit} className="px-6 py-4 space-y-4">
-
-          {/* Date + Amount */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form onSubmit={submit} className="px-4 py-4 md:px-6 md:py-4 space-y-4">
+          
+          {/* Date + Amount - Stack on mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Expense Date
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Expense Date *
               </label>
               <input
                 type="date"
@@ -79,30 +105,35 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
                 required
                 value={form.expense_date}
                 onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 outline-none"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Amount
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Amount *
               </label>
-              <input
-                type="number"
-                name="amount"
-                required
-                value={form.amount}
-                onChange={handleChange}
-                placeholder="₹ Amount"
-                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 outline-none"
-              />
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">₹</span>
+                <input
+                  type="number"
+                  name="amount"
+                  required
+                  value={form.amount}
+                  onChange={handleChange}
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  className="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                />
+              </div>
             </div>
           </div>
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Expense Title
+            <label className="block text-sm font-medium mb-1 text-gray-700">
+              Expense Title *
             </label>
             <input
               type="text"
@@ -111,21 +142,21 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
               value={form.title}
               onChange={handleChange}
               placeholder="Cement purchase, Transport, etc."
-              className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 outline-none"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
             />
           </div>
 
-          {/* Client + Worksite */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Client + Worksite - Stack on mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-sm font-medium mb-1 text-gray-700">
                 Client (Optional)
               </label>
               <select
                 name="client"
                 value={form.client}
                 onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none bg-white"
               >
                 <option value="">Select Client</option>
                 {clients.map((c) => (
@@ -137,14 +168,15 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Worksite
+              <label className="block text-sm font-medium mb-1 text-gray-700">
+                Worksite *
               </label>
               <select
                 name="worksite"
                 value={form.worksite}
                 onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2"
+                required
+                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none bg-white"
               >
                 <option value="">Select Worksite</option>
                 {worksites.map((w) => (
@@ -158,7 +190,7 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label className="block text-sm font-medium mb-1 text-gray-700">
               Description
             </label>
             <textarea
@@ -166,31 +198,43 @@ const ExpenseModal = ({ isOpen, onClose, onSuccess, clients, worksites }) => {
               value={form.description}
               onChange={handleChange}
               rows="3"
-              placeholder="Additional details..."
-              className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-slate-900 outline-none"
+              placeholder="Additional details about the expense..."
+              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm md:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition resize-none"
             />
           </div>
         </form>
 
-        {/* Footer */}
-        <div className="px-6 py-4 border-t flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={loading}
-            className="px-4 py-2 border rounded-lg"
-          >
-            Cancel
-          </button>
+        {/* Footer - Sticky on mobile */}
+        <div className="sticky bottom-0 bg-white px-4 py-3 md:px-6 md:py-4 border-t flex flex-col sm:flex-row justify-end gap-3">
+          <div className="flex-1 sm:flex-none flex gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={loading}
+              className="flex-1 sm:flex-none px-4 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition disabled:opacity-50 text-sm md:text-base"
+            >
+              Cancel
+            </button>
 
-          <button
-            type="submit"
-            onClick={submit}
-            disabled={loading}
-            className="px-5 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50"
-          >
-            {loading ? "Saving..." : "Save Expense"}
-          </button>
+            <button
+              type="submit"
+              onClick={submit}
+              disabled={loading}
+              className="flex-1 sm:flex-none px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base"
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Saving...
+                </>
+              ) : (
+                "Save Expense"
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
