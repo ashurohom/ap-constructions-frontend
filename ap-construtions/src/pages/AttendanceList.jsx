@@ -12,41 +12,32 @@ const authHeader = () => ({
 
 const AttendanceList = () => {
   const [attendance, setAttendance] = useState([]);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
+
   const [date, setDate] = useState("");
   const [search, setSearch] = useState("");
 
-  const loadAttendance = async () => {
+  const loadAttendance = async (pageNumber = 1) => {
     const res = await axios.get(`${API_BASE}/attendance/`, {
       ...authHeader(),
       params: {
         date,
         search,
+        page: pageNumber,
       },
     });
-    setAttendance(res.data);
+
+    setAttendance(res.data.results);
+    setCount(res.data.count);
+    setPage(pageNumber);
   };
 
   useEffect(() => {
-    loadAttendance();
+    loadAttendance(1);
   }, []);
 
-  const markPaid = async (id) => {
-    await axios.patch(
-      `${API_BASE}/attendance/${id}/mark_paid/`,
-      {},
-      authHeader()
-    );
-    loadAttendance();
-  };
-
-  const markUnpaid = async (id) => {
-    await axios.patch(
-      `${API_BASE}/attendance/${id}/mark_unpaid/`,
-      {},
-      authHeader()
-    );
-    loadAttendance();
-  };
+  const totalPages = Math.ceil(count / 15);
 
   return (
     <>
@@ -73,7 +64,7 @@ const AttendanceList = () => {
           />
 
           <button
-            onClick={loadAttendance}
+            onClick={() => loadAttendance(1)}
             className="bg-slate-900 text-white px-4 py-2 rounded"
           >
             Apply
@@ -85,13 +76,11 @@ const AttendanceList = () => {
           <table className="w-full table-fixed">
             <thead className="bg-slate-200">
               <tr>
-                <th className="p-3 w-[140px]">Date</th>
-                <th className="p-3 w-[180px]">Worker</th>
-                <th className="p-3 w-[160px]">Worksite</th>
-                <th className="p-3 w-[120px]">Status</th>
-                <th className="p-3 w-[120px]">Amount</th>
-                {/* <th className="p-3 w-[120px]">Payment</th>
-                <th className="p-3 w-[140px]">Action</th> */}
+                <th className="p-3">Date</th>
+                <th className="p-3">Worker</th>
+                <th className="p-3">Worksite</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Amount</th>
               </tr>
             </thead>
 
@@ -103,44 +92,12 @@ const AttendanceList = () => {
                   <td className="p-3">{a.worksite_name}</td>
                   <td className="p-3">{a.status}</td>
                   <td className="p-3">₹{a.amount_earned}</td>
-
-                  {/* PAYMENT */}
-                  {/* <td className="p-3">
-                    <span
-                      className={`inline-flex items-center justify-center px-2 py-1 text-sm rounded text-white ${
-                        a.payment_status === "PAID"
-                          ? "bg-green-600"
-                          : "bg-red-500"
-                      }`}
-                    >
-                      {a.payment_status}
-                    </span>
-                  </td> */}
-
-                  {/* ACTION */}
-                  {/* <td className="p-3">
-                    {a.payment_status === "UNPAID" ? (
-                      <button
-                        onClick={() => markPaid(a.id)}
-                        className="text-green-600 hover:underline"
-                      >
-                        Mark Paid
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => markUnpaid(a.id)}
-                        className="text-red-600 hover:underline"
-                      >
-                        Mark Unpaid
-                      </button>
-                    )}
-                  </td> */}
                 </tr>
               ))}
 
               {attendance.length === 0 && (
                 <tr>
-                  <td colSpan="7" className="p-4 text-center text-slate-500">
+                  <td colSpan="5" className="p-4 text-center text-slate-500">
                     No attendance found
                   </td>
                 </tr>
@@ -149,6 +106,38 @@ const AttendanceList = () => {
           </table>
         </div>
 
+        {/* PAGINATION */}
+        {totalPages > 1 && (
+          <div className="flex justify-center gap-2 mt-6">
+            <button
+              disabled={page === 1}
+              onClick={() => loadAttendance(page - 1)}
+              className="px-3 py-1 border rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+
+            {[...Array(totalPages)].map((_, i) => (
+              <button
+                key={i}
+                onClick={() => loadAttendance(i + 1)}
+                className={`px-3 py-1 border rounded ${
+                  page === i + 1 ? "bg-slate-900 text-white" : ""
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+
+            <button
+              disabled={page === totalPages}
+              onClick={() => loadAttendance(page + 1)}
+              className="px-3 py-1 border rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
