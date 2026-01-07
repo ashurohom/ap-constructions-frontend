@@ -8,14 +8,20 @@ const Home = () => {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
 
+  /* =========================
+     LOGIN HANDLER (FIXED)
+  ========================= */
   const handleLogin = async (username, password) => {
-    const success = await loginUser(username, password);
-    if (success) {
+    const result = await loginUser(username, password);
+
+    // ✅ ONLY ON SUCCESS
+    if (result.success) {
       setShowLogin(false);
       navigate("/dashboard");
-      return true;
     }
-    return false;
+
+    // 🔁 ALWAYS RETURN RESULT
+    return result;
   };
 
   const handleDashboardClick = () => {
@@ -81,9 +87,8 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Developer Profile Card*/
+            {/* Developer Profile Card */}
             <div className="bg-white rounded-lg shadow px-5 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm">
-              
               <span className="text-slate-600">
                 © 2025{" "}
                 <a
@@ -110,11 +115,7 @@ const Home = () => {
               >
                 🤝 Connect
               </a>
-
-            </div> }
-
-
-
+            </div>
 
           </div>
         </div>

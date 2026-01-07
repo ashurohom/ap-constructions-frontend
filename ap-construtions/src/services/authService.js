@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000/api/accounts";
 
 /* =========================
-   LOGIN
+   LOGIN (WITH THROTTLE HANDLING)
 ========================= */
 export const loginUser = async (username, password) => {
   try {
@@ -15,10 +15,37 @@ export const loginUser = async (username, password) => {
     localStorage.setItem("access_token", response.data.access);
     localStorage.setItem("refresh_token", response.data.refresh);
 
-    return true;
+    return {
+      success: true,
+    };
   } catch (error) {
-    console.error("Login failed", error);
-    return false;
+    if (error.response) {
+      // 🚫 TOO MANY REQUESTS (THROTTLED)
+      if (error.response.status === 429) {
+        return {
+          success: false,
+          type: "throttle",
+          message:
+            "Too many login attempts. Please try again after 1 minute.",
+        };
+      }
+
+      // ❌ INVALID CREDENTIALS
+      if (error.response.status === 400) {
+        return {
+          success: false,
+          type: "invalid",
+          message: "Invalid username or password",
+        };
+      }
+    }
+
+    // ⚠️ SERVER / NETWORK ERROR
+    return {
+      success: false,
+      type: "server",
+      message: "Server error. Please try again later.",
+    };
   }
 };
 
@@ -38,7 +65,7 @@ export const isAuthenticated = () => {
 };
 
 /* =========================
-   USER PROFILE (FIXED)
+   USER PROFILE
 ========================= */
 export const getUserProfile = async () => {
   const token = localStorage.getItem("access_token");
@@ -46,7 +73,7 @@ export const getUserProfile = async () => {
 
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/accounts/me/",
+      `${API_URL}/me/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -60,4 +87,3 @@ export const getUserProfile = async () => {
     return null;
   }
 };
-
