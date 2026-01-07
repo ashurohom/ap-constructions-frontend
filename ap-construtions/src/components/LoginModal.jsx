@@ -19,7 +19,7 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
   if (!isOpen) return null;
 
   /* =========================
-     SUBMIT HANDLER (FIXED)
+     SUBMIT HANDLER
   ========================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,18 +27,15 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
 
     const result = await onLogin(username, password);
 
-    // ❌ LOGIN FAILED
     if (!result.success) {
       setError(result.message);
 
-      // 🔄 RESET INPUTS
       setUsername("");
       setPassword("");
       setShowPassword(false);
       return;
     }
 
-    // ✅ LOGIN SUCCESS
     onClose();
   };
 
@@ -73,10 +70,22 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
           </p>
         </div>
 
-        {/* ERROR MESSAGE */}
+        {/* 🔔 BEAUTIFUL ERROR NOTIFICATION */}
         {error && (
-          <div className="mt-4 text-center text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
-            {error}
+          <div
+            className="mt-5 flex items-start gap-3 
+                       bg-red-50 border border-red-200 
+                       text-red-700 rounded-xl px-4 py-3
+                       animate-[fadeIn_0.3s_ease-out]"
+          >
+            {/* ICON */}
+            <span className="text-xl mt-0.5">⚠️</span>
+
+            {/* TEXT */}
+            <div className="text-sm leading-relaxed">
+              <p className="font-semibold">Login Failed</p>
+              <p className="opacity-90">{error}</p>
+            </div>
           </div>
         )}
 
@@ -117,7 +126,6 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
                 required
               />
 
-              {/* EYE ICON */}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
