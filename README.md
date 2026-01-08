@@ -88,3 +88,8 @@ npm install
 ```bash
 npm run dev
 ```
+
+### 3. The Application Will Start At
+```bash
+http://localhost:5173
+```
