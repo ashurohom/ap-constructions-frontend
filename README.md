@@ -37,3 +37,46 @@ The frontend communicates with a Django REST API and provides a clean, responsiv
 
 ## Project Structure
 
+src/
+├── components/
+│ ├── Navbar.jsx
+│ ├── LoginModal.jsx
+│ ├── ProtectedRoute.jsx
+│
+├── pages/
+│ ├── Home.jsx
+│ ├── Dashboard.jsx
+│ ├── Workers.jsx
+│ ├── Clients.jsx
+│ ├── Worksites.jsx
+│ ├── AttendanceList.jsx
+│ ├── Payroll.jsx
+│ ├── WorkerPayrollHistory.jsx
+│ ├── Expenses.jsx
+│
+├── services/
+│ ├── authService.js
+│ ├── attendanceService.js
+│ ├── payrollService.js
+│
+├── App.jsx
+├── main.jsx
+
+
+---
+
+## Authentication Flow
+
+- Login uses JWT access and refresh tokens
+- Tokens are stored in localStorage
+- Protected routes redirect unauthenticated users
+- API throttling feedback is handled gracefully on the UI
+
+---
+
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```bash
+npm install
