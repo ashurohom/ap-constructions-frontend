@@ -81,7 +81,24 @@ src/
 ```bash
 npm install
 
+
 ### 2. Run Development Server 
 
 ```bash
 npm run dev
+
+
+### 3. The application will start at
+'''bash
+http://localhost:5173
+
+
+
+Author
+
+Developed by
+Ashitosh Rohom
+
+Portfolio: https://ashitoshrohom.netlify.app
+
+LinkedIn: https://www.linkedin.com/in/ashitoshrohom
