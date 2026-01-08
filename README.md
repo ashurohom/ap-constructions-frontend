@@ -93,3 +93,13 @@ npm run dev
 ```bash
 http://localhost:5173
 ```
+
+
+Author
+
+Developed by
+Ashitosh Rohom
+
+Portfolio: https://ashitoshrohom.netlify.app
+
+LinkedIn: https://www.linkedin.com/in/ashitoshrohom
