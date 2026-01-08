@@ -95,11 +95,11 @@ http://localhost:5173
 ```
 
 
-Author
+### Author
 
 Developed by
-Ashitosh Rohom
+- Ashitosh Rohom
 
-Portfolio: https://ashitoshrohom.netlify.app
+- Portfolio: https://ashitoshrohom.netlify.app
 
-LinkedIn: https://www.linkedin.com/in/ashitoshrohom
+- LinkedIn: https://www.linkedin.com/in/ashitoshrohom
