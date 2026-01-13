@@ -99,7 +99,7 @@ http://localhost:5173
 
 ### Author
 
-Design and Developed by -
+Developed by
 - Ashitosh Rohom
 
 - Portfolio: https://ashitoshrohom.netlify.app
