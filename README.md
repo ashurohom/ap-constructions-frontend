@@ -15,6 +15,7 @@ The frontend communicates with a Django REST API and provides a clean, responsiv
 - Axios
 - React Router DOM
 - JWT Authentication
+- CSS
 
 ---
 
